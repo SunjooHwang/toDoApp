@@ -1,7 +1,6 @@
 import * as model from "./model.js";
 import indexView from "./views/indexView.js";
 import addTaskView from "./views/addTaskView.js";
-import editTaskView from "./views/editTaskView.js";
 import toDoView from "./views/toDoView.js";
 import doneView from "./views/doneView.js";
 
@@ -15,10 +14,6 @@ const controlToDoList = function () {
 const controlToDoItemDelete = function () {
   model.deleteTodoItem(model.state.todo.id);
   toDoView.render(model.state.todo);
-};
-
-const controlToDoEdit = function () {
-  // 1) Render edit form
 };
 
 const controlToDoItemCheck = function (id) {
@@ -60,17 +55,16 @@ const controlAddTask = function (data) {
 };
 
 const init = function () {
+  indexView.addHandlerReset(controlAllReset);
+
   toDoView.addHandlerRender(controlToDoList);
   toDoView.addHandlerReset(controlToDoReset);
   toDoView.addHandlerDelete(controlToDoItemDelete);
   toDoView.addHandlerCheck(controlToDoItemCheck);
 
-  toDoView.addHandlerEdit(controlToDoEdit);
-
   doneView.addHandlerRender(controlDoneList);
   doneView.addHandlerCheck(controlDoneItemCheck);
 
   addTaskView.addHandlerUpload(controlAddTask);
-  indexView.addHandlerReset(controlAllReset);
 };
 init();

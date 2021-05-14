@@ -43,7 +43,6 @@ export const deleteTodoItem = function (id) {
 export const editTodoItem = function (id) {
   const index = state.todo.findIndex((el) => el.id === id);
   console.log(index);
-  persistTasks();
 };
 
 export const checkOutToDoItem = function (id) {

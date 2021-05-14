@@ -1,45 +1,46 @@
 import View from "./View.js";
 
-class AddTaskview extends View {
+class EditTaskview extends View {
   _parentElement = document.querySelector(".edit-task-form");
 
-  _window = document.querySelector(".add-task-window");
+  _window = document.querySelector(".edit-task-window");
   _overlay = document.querySelector(".overlay");
-  _btnOpen;
-  _btnClose = document.querySelector(".add-task-form-close-btn");
+  _btnClose = document.querySelector(".edit-task-form-close-btn");
+  _btnEdit;
 
   constructor() {
     super();
-    this.selectBtn();
-  }
-
-  selectBtn() {
-    window.addEventListener("load", function () {
-      this._btnOpen = document.querySelectorAll(".edit--btn");
-      console.log(this._btnOpen);
-    });
-  }
-
-  _addHandler() {
-    this._addHandlerShowWindow();
     this._addHandlerHideWindow();
   }
 
-  toggleWindow() {
-    this._overlay.classList.toggle("hidden");
-    this._window.classList.toggle("hidden");
+  addHandlerRender(handler) {
+    window.addEventListener("load", handler);
   }
 
-  _addHandlerShowWindow() {
-    this._btnOpen.addEventListener("click", this.toggleWindow.bind(this));
+  addHandlerEdit() {
+    // 1) toDoView 가 render 되고 나면 btnEdit select
+    this._btnEdit = document.querySelectorAll(".edit--btn");
+    // 2) btnEdit을 loop 해서 edit window redner 하는 event listener 부착
+    this._addHandlerShowWindow();
   }
 
-  _addHandlerHideWindow() {
-    this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
-    this._overlay.addEventListener("click", this.toggleWindow.bind(this));
+  test() {
+    console.log(this._btnEdit);
   }
 
-  addHandlerUpload(handler) {
+  addHandlerSubmit(handler) {
+    this._btnEdit = document.querySelectorAll(".edit--btn");
+
+    this._btnEdit.forEach((btn) =>
+      btn.addEventListener("click", function (e) {
+        console.log("clicked");
+        const { id } = btn.dataset;
+        this._addHandlerUpload();
+      })
+    );
+  }
+
+  _addHandlerUpload(handler) {
     this._parentElement.addEventListener("submit", function (e) {
       e.preventDefault();
       const dataArr = [...new FormData(this)];
@@ -48,7 +49,23 @@ class AddTaskview extends View {
     });
   }
 
+  toggleWindow() {
+    this._overlay.classList.toggle("hidden");
+    this._window.classList.toggle("hidden");
+  }
+
+  _addHandlerShowWindow() {
+    this._btnEdit.forEach((btn) =>
+      btn.addEventListener("click", this.toggleWindow.bind(this))
+    );
+  }
+
+  _addHandlerHideWindow() {
+    this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
+    this._overlay.addEventListener("click", this.toggleWindow.bind(this));
+  }
+
   _generateMarkup() {}
 }
 
-export default new AddTaskview();
+export default new EditTaskview();

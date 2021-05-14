@@ -180,7 +180,6 @@ var editTodoItem = function editTodoItem(id) {
     return el.id === id;
   });
   console.log(index);
-  persistTasks();
 };
 
 exports.editTodoItem = editTodoItem;
@@ -394,15 +393,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var toDoView = /*#__PURE__*/function (_View) {
-  _inherits(toDoView, _View);
+var ToDoView = /*#__PURE__*/function (_View) {
+  _inherits(ToDoView, _View);
 
-  var _super = _createSuper(toDoView);
+  var _super = _createSuper(ToDoView);
 
-  function toDoView() {
+  function ToDoView() {
     var _this;
 
-    _classCallCheck(this, toDoView);
+    _classCallCheck(this, ToDoView);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -414,24 +413,12 @@ var toDoView = /*#__PURE__*/function (_View) {
 
     _defineProperty(_assertThisInitialized(_this), "_resetBtn", document.querySelector(".todo-reset--btn"));
 
-    _defineProperty(_assertThisInitialized(_this), "_window", document.querySelector(".edit-task-window"));
-
-    _defineProperty(_assertThisInitialized(_this), "_overlay", document.querySelector(".overlay"));
-
-    _defineProperty(_assertThisInitialized(_this), "_btnOpen", void 0);
-
-    _defineProperty(_assertThisInitialized(_this), "_btnClose", document.querySelector(".edit-task-form-close-btn"));
-
     return _this;
   }
 
-  _createClass(toDoView, [{
+  _createClass(ToDoView, [{
     key: "addHandlerRender",
-    value: // constructor() {
-    //   super();
-    //   this.addHandlerEdit();
-    // }
-    function addHandlerRender(handler) {
+    value: function addHandlerRender(handler) {
       window.addEventListener("load", handler);
     }
   }, {
@@ -460,32 +447,6 @@ var toDoView = /*#__PURE__*/function (_View) {
       });
     }
   }, {
-    key: "addHandlerEdit",
-    value: function addHandlerEdit() {
-      window.addEventListener("load", function (e) {
-        this._btnOpen = document.querySelectorAll(".edit--btn");
-        console.log(this._btnOpen);
-
-        this._btnOpen.forEach(function (btn) {
-          return btn.addEventListener("click", function (e) {
-            console.log(e);
-            document.querySelector(".overlay").classList.toggle("hidden");
-            document.querySelector(".edit-task-window").classList.toggle("hidden");
-          });
-        });
-
-        document.querySelector(".edit-task-form-close-btn").addEventListener("click", function () {
-          console.log(e);
-          document.querySelector(".overlay").classList.toggle("hidden");
-          document.querySelector(".edit-task-window").classList.toggle("hidden");
-        });
-        document.querySelector(".overlay").addEventListener("click", function () {
-          document.querySelector(".overlay").classList.toggle("hidden");
-          document.querySelector(".edit-task-window").classList.toggle("hidden");
-        });
-      });
-    }
-  }, {
     key: "_generateMarkup",
     value: function _generateMarkup() {
       return this._data.map(function (el) {
@@ -494,10 +455,10 @@ var toDoView = /*#__PURE__*/function (_View) {
     }
   }]);
 
-  return toDoView;
+  return ToDoView;
 }(_View2.default);
 
-var _default = new toDoView();
+var _default = new ToDoView();
 
 exports.default = _default;
 },{"./View.js":"src/js/views/View.js","./listView.js":"src/js/views/listView.js"}],"src/js/views/indexView.js":[function(require,module,exports) {
@@ -652,138 +613,6 @@ var AddTaskview = /*#__PURE__*/function (_View) {
   }
 
   _createClass(AddTaskview, [{
-    key: "toggleWindow",
-    value: function toggleWindow() {
-      this._overlay.classList.toggle("hidden");
-
-      this._window.classList.toggle("hidden");
-    }
-  }, {
-    key: "_addHandlerShowWindow",
-    value: function _addHandlerShowWindow() {
-      this._btnOpen.addEventListener("click", this.toggleWindow.bind(this));
-    }
-  }, {
-    key: "_addHandlerHideWindow",
-    value: function _addHandlerHideWindow() {
-      this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
-
-      this._overlay.addEventListener("click", this.toggleWindow.bind(this));
-    }
-  }, {
-    key: "addHandlerUpload",
-    value: function addHandlerUpload(handler) {
-      this._parentElement.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        var dataArr = _toConsumableArray(new FormData(this));
-
-        var data = Object.fromEntries(dataArr);
-        handler(data);
-      });
-    }
-  }, {
-    key: "_generateMarkup",
-    value: function _generateMarkup() {}
-  }]);
-
-  return AddTaskview;
-}(_View2.default);
-
-var _default = new AddTaskview();
-
-exports.default = _default;
-},{"./View.js":"src/js/views/View.js"}],"src/js/views/editTaskView.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _View2 = _interopRequireDefault(require("./View.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var AddTaskview = /*#__PURE__*/function (_View) {
-  _inherits(AddTaskview, _View);
-
-  var _super = _createSuper(AddTaskview);
-
-  function AddTaskview() {
-    var _this;
-
-    _classCallCheck(this, AddTaskview);
-
-    _this = _super.call(this);
-
-    _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector(".edit-task-form"));
-
-    _defineProperty(_assertThisInitialized(_this), "_window", document.querySelector(".add-task-window"));
-
-    _defineProperty(_assertThisInitialized(_this), "_overlay", document.querySelector(".overlay"));
-
-    _defineProperty(_assertThisInitialized(_this), "_btnOpen", void 0);
-
-    _defineProperty(_assertThisInitialized(_this), "_btnClose", document.querySelector(".add-task-form-close-btn"));
-
-    _this.selectBtn();
-
-    return _this;
-  }
-
-  _createClass(AddTaskview, [{
-    key: "selectBtn",
-    value: function selectBtn() {
-      window.addEventListener("load", function () {
-        this._btnOpen = document.querySelectorAll(".edit--btn");
-        console.log(this._btnOpen);
-      });
-    }
-  }, {
-    key: "_addHandler",
-    value: function _addHandler() {
-      this._addHandlerShowWindow();
-
-      this._addHandlerHideWindow();
-    }
-  }, {
     key: "toggleWindow",
     value: function toggleWindow() {
       this._overlay.classList.toggle("hidden");
@@ -13093,8 +12922,6 @@ var _indexView = _interopRequireDefault(require("./views/indexView.js"));
 
 var _addTaskView = _interopRequireDefault(require("./views/addTaskView.js"));
 
-var _editTaskView = _interopRequireDefault(require("./views/editTaskView.js"));
-
 var _toDoView = _interopRequireDefault(require("./views/toDoView.js"));
 
 var _doneView = _interopRequireDefault(require("./views/doneView.js"));
@@ -13117,9 +12944,6 @@ var controlToDoItemDelete = function controlToDoItemDelete() {
   model.deleteTodoItem(model.state.todo.id);
 
   _toDoView.default.render(model.state.todo);
-};
-
-var controlToDoEdit = function controlToDoEdit() {// 1) Render edit form
 };
 
 var controlToDoItemCheck = function controlToDoItemCheck(id) {
@@ -13167,6 +12991,8 @@ var controlAddTask = function controlAddTask(data) {
 };
 
 var init = function init() {
+  _indexView.default.addHandlerReset(controlAllReset);
+
   _toDoView.default.addHandlerRender(controlToDoList);
 
   _toDoView.default.addHandlerReset(controlToDoReset);
@@ -13175,19 +13001,15 @@ var init = function init() {
 
   _toDoView.default.addHandlerCheck(controlToDoItemCheck);
 
-  _toDoView.default.addHandlerEdit(controlToDoEdit);
-
   _doneView.default.addHandlerRender(controlDoneList);
 
   _doneView.default.addHandlerCheck(controlDoneItemCheck);
 
   _addTaskView.default.addHandlerUpload(controlAddTask);
-
-  _indexView.default.addHandlerReset(controlAllReset);
 };
 
 init();
-},{"./model.js":"src/js/model.js","./views/indexView.js":"src/js/views/indexView.js","./views/addTaskView.js":"src/js/views/addTaskView.js","./views/editTaskView.js":"src/js/views/editTaskView.js","./views/toDoView.js":"src/js/views/toDoView.js","./views/doneView.js":"src/js/views/doneView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./model.js":"src/js/model.js","./views/indexView.js":"src/js/views/indexView.js","./views/addTaskView.js":"src/js/views/addTaskView.js","./views/toDoView.js":"src/js/views/toDoView.js","./views/doneView.js":"src/js/views/doneView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -13215,7 +13037,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52454" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50166" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
