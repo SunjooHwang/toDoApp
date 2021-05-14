@@ -1,0 +1,188 @@
+.container {
+  width: 100vw;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 5% 5% 80% 10%;
+  grid-template-areas:
+    ". ."
+    "nav nav"
+    "todo done"
+    ". .";
+
+  overflow: hidden;
+
+  .nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .to_do--nav {
+      width: 50%;
+      display: flex;
+      flex-direction: row;
+
+      justify-content: space-between;
+      grid-area: nav;
+
+      .btn {
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid white;
+        border-radius: 0.5rem;
+        backdrop-filter: blur(1px);
+
+        padding: 1rem;
+
+        font-family: $poppins;
+        font-size: 1.2rem;
+        transition: all 0.2s ease-in-out;
+
+        &-icon {
+          color: white;
+          transition: all 0.2s ease-in-out;
+        }
+
+        &:hover {
+          background-color: white;
+
+          .btn-icon {
+            color: $color-grey-dark-2;
+          }
+        }
+      }
+    }
+  }
+}
+
+.list-container {
+  // width: 50vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 5% 75% 10%;
+
+  .list-title {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    font-family: $poppins;
+    text-align: center;
+  }
+
+  .list--wrap {
+    background-color: rgba(255, 255, 255, 0.3);
+
+    border: 1px solid white;
+    backdrop-filter: blur(1px);
+
+    display: flex;
+    flex-direction: column;
+
+    .list--nav {
+      height: 3rem;
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-self: center;
+      justify-self: center;
+    }
+
+    .list--area {
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .list {
+        &--item {
+          background-color: rgba(255, 255, 255, 0.7);
+
+          height: 8.5rem;
+
+          margin: 1rem;
+          padding: 1.5rem;
+
+          display: grid;
+          grid-template-columns: 85% 15%;
+          grid-template-rows: 90% 10%;
+          grid-template-areas:
+            "desc desc"
+            ". menu";
+
+          box-shadow: 1px 1px 3px $color-grey-light-3;
+
+          &--desc {
+            grid-area: desc;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            h3 {
+              text-transform: capitalize;
+              font-family: $poppins;
+              font-weight: 300;
+              font-size: 1.2rem;
+              text-align: center;
+            }
+          }
+
+          &--menu {
+            grid-area: menu;
+            min-width: 5rem;
+            display: flex;
+            justify-content: space-between;
+            .btn {
+              color: $color-blue-1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+
+  // dev setting
+  // background-color: white;
+  // border: 1px solid blue;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: right;
+}
+
+.to_do {
+  // background-color: $color-primary;
+  grid-template-columns: 10% 20% 65% 5%;
+
+  grid-template-areas:
+    " . . . ."
+    ". . todo-container ."
+    " . . . .";
+
+  grid-area: todo;
+
+  .list--wrap {
+    grid-area: todo-container;
+  }
+}
+
+.done {
+  // background-color: $color-grey-dark-2;
+
+  grid-template-columns: 5% 65% 20% 10%;
+
+  grid-template-areas:
+    " . . . ."
+    ". done-container . ."
+    " . . . .";
+
+  grid-area: done;
+
+  .list--wrap {
+    grid-area: done-container;
+  }
+}

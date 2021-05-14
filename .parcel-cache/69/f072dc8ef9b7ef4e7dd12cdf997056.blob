@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+.list-conainer {
+  background-color: #d9cc1e;
+}
+/*# sourceMappingURL=index.HASH_REF_4b4dac7bc024e44091b1469a1206e35b.css.map */

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <!-- font awesome -->
+    <script
+      defer
+      src="./node_modules/@fortawesome/fontawesome-free/js/all.js"
+    ></script>
+
+    <!-- sass -->
+    <link rel="stylesheet" href="src/sass/main.scss" />
+    <!-- script -->
+    <script defer src="src/js/controller.js"></script>
+    <link rel="shortcut icon" href="./src/img/1486564398-menu2_81519.ico" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <div class="to_do--nav">
+          <button class="btn new_task--btn">
+            <i class="fas fa-chevron-right btn-icon"></i>&nbsp;add new task
+          </button>
+          <button class="btn reset--btn">
+            <i class="fas fa-chevron-right btn-icon"></i>&nbsp;reset lists
+          </button>
+        </div>
+      </nav>
+      <section class="list-container to_do">
+        <div class="list--wrap">
+          <h1 class="list-title">to do</h1>
+          <div class="list--nav list--nav-todo">
+            <button class="btn todo-sort_date--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by date
+            </button>
+            <button class="btn todo-sort_importance--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by
+              importance
+            </button>
+            <button class="btn todo-reset--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;remove all
+            </button>
+          </div>
+          <div class="list--area">
+            <ul class="list list--to_do">
+              <!-- <li class="list--item list--to_do--item">
+                <div class="list--item--desc">
+                  <h3 class="list--item__task">dentist appointment</h3>
+                  <h3 class="list--item__date">2021/05/08</h3>
+                  <h3 class="list--item__place">Dr.Kim's dental clinic</h3>
+                  <h3 class="list--item__importance">☆★★★★</h3>
+                </div>
+                <div class="list--item--menu">
+                  <button class="btn edit--btn">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn delete--btn">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn done--btn">
+                    <i class="fas fa-check"></i>
+                  </button>
+                </div>
+              </li>
+              <li class="list--item ">
+                <div class="list--item--desc">
+                  <h3 class="list--item__task">family dinner</h3>
+                  <h3 class="list--item__date">2021/05/13</h3>
+                  <h3 class="list--item__place">my apartment</h3>
+                  <h3 class="list--item__importance">☆☆★★★</h3>
+                </div>
+                <div class="list--item--menu">
+                  <button class="btn edit--btn">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn delete--btn">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn done--btn">
+                    <i class="fas fa-check"></i>
+                  </button>
+                </div>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="list-container done">
+        <div class="list--wrap">
+          <h1 class="list-title">done</h1>
+          <div class="list--nav list--nav-todo">
+            <button class="btn done-sort_date--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by date
+            </button>
+            <button class="btn done-sort_importance--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by
+              importance
+            </button>
+            <button class="btn done-reset--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;remove all
+            </button>
+          </div>
+          <div class="list--area">
+            <ul class="list list--done">
+              <!-- <li class="list--item">
+                <div class="list--item--desc">
+                  <h3 class="list--item__task">family dinner</h3>
+                  <h3 class="list--item__date">2021/05/13</h3>
+                  <h3 class="list--item__place">my apartment</h3>
+                  <h3 class="list--item__importance">☆☆★★★</h3>
+                </div>
+                <div class="list--item--menu">
+                  <button class="btn edit--btn">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn delete--btn">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn done--btn">
+                    <i class="fas fa-check"></i>
+                  </button>
+                </div>
+              </li>
+              <li class="list--item list--done--item">
+                <div class="list--item--desc">
+                  <h3 class="list--item__task">family dinner</h3>
+                  <h3 class="list--item__date">2021/05/13</h3>
+                  <h3 class="list--item__place">my apartment</h3>
+                  <h3 class="list--item__importance">☆☆★★★</h3>
+                </div>
+                <div class="list--item--menu">
+                  <button class="btn edit--btn">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn delete--btn">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                  <button class="btn done--btn">
+                    <i class="fas fa-check"></i>
+                  </button>
+                </div>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </section>
+      <div class="overlay hidden"></div>
+      <div class="modal-window add-task-window hidden">
+        <button class="btn--close-modal add-task-form-close-btn">
+          &times;
+        </button>
+        <form class="form-modal add-task-form">
+          <div class="input">
+            <label for="task" class="input--label">TASK:</label>
+            <input type="text" value="0" name="task" id="task" />
+            <label for="date" class="input--label">DATE:</label>
+            <input type="text" value="0" name="date" id="date" />
+            <label for="place" class="input--label">PLACE:</label>
+            <input type="text" value="0" name="place" id="place" />
+            <label for="importance" class="input--label">IMPORTANCE:</label>
+            <input type="text" value="0" name="importance" id="importance" />
+          </div>
+          <button class="btn btn--submit">
+            <i class="fas fa-check"></i>Submit
+          </button>
+        </form>
+      </div>
+      <div class="modal-window edit-task-window hidden">
+        <button class="btn--close-modal edit-task-form-close-btn">
+          &times;
+        </button>
+        <form class="form-modal edit-task-form">
+          <div class="input">
+            <label for="task" class="input--label">TASK:</label>
+            <input type="text" value="0" name="task" id="task" />
+            <label for="date" class="input--label">DATE:</label>
+            <input type="text" value="0" name="date" id="date" />
+            <label for="place" class="input--label">PLACE:</label>
+            <input type="text" value="0" name="place" id="place" />
+            <label for="importance" class="input--label">IMPORTANCE:</label>
+            <input type="text" value="0" name="importance" id="importance" />
+          </div>
+          <button class="btn btn--submit">
+            <i class="fas fa-check"></i>Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

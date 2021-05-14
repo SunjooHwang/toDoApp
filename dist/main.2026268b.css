@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Source+Sans+Pro:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  background-color: #f2e529;
+  background-image: linear-gradient(#f2eda2 1px, transparent 1px), linear-gradient(to right, #f2eda2 1px, #f2e529 1px);
+  background-size: 20px 20px;
+  overflow: hidden;
+}
+
+li {
+  list-style: none;
+}
+
+.container {
+  width: 100vw;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 5% 5% 80% 10%;
+  grid-template-areas: ". ." "nav nav" "todo done" ". .";
+  overflow: hidden;
+}
+.container .nav {
+  grid-area: nav;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .nav .to_do--nav {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  grid-area: nav;
+}
+.container .nav .to_do--nav .btn {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(1px);
+  padding: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  transition: all 0.2s ease-in-out;
+}
+.container .nav .to_do--nav .btn-icon {
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+.container .nav .to_do--nav .btn:hover {
+  background-color: white;
+}
+.container .nav .to_do--nav .btn:hover .btn-icon {
+  color: #918581;
+}
+
+.list-container {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 5% 75% 10%;
+}
+.list-container .list-title {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+.list-container .list--wrap {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid white;
+  backdrop-filter: blur(1px);
+  display: flex;
+  flex-direction: column;
+}
+.list-container .list--wrap .list--nav {
+  height: 3rem;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  justify-self: center;
+}
+.list-container .list--wrap .list--area {
+  overflow-y: scroll;
+}
+.list-container .list--wrap .list--area::-webkit-scrollbar {
+  display: none;
+}
+.list-container .list--wrap .list--area .list--item {
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 8.5rem;
+  margin: 1rem;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 85% 15%;
+  grid-template-rows: 90% 10%;
+  grid-template-areas: "desc desc" ". menu";
+  box-shadow: 1px 1px 3px #bfbbba;
+}
+.list-container .list--wrap .list--area .list--item--desc {
+  grid-area: desc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.list-container .list--wrap .list--area .list--item--desc h3 {
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  text-align: center;
+}
+.list-container .list--wrap .list--area .list--item--menu {
+  grid-area: menu;
+  min-width: 5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.list-container .list--wrap .list--area .list--item--menu .btn {
+  color: #6829f2;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: right;
+}
+
+.to_do {
+  grid-template-columns: 10% 20% 65% 5%;
+  grid-template-areas: " . . . ." ". . todo-container ." " . . . .";
+  grid-area: todo;
+}
+.to_do .list--wrap {
+  grid-area: todo-container;
+}
+
+.done {
+  grid-template-columns: 5% 65% 20% 10%;
+  grid-template-areas: " . . . ." ". done-container . ." " . . . .";
+  grid-area: done;
+}
+.done .list--wrap {
+  grid-area: done-container;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.modal-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rem;
+  height: 15rem;
+  background-color: white;
+  border-radius: 9px;
+  padding: 3rem 2rem;
+  box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+}
+.modal-window .btn--close-modal {
+  font-family: inherit;
+  color: inherit;
+  position: absolute;
+  top: 0.5rem;
+  right: 1.6rem;
+  font-size: 3.5rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.modal-window .form-modal {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.modal-window .form-modal .input {
+  display: grid;
+  grid-template-columns: 25% 70%;
+  grid-template-rows: repeat(4, 25%);
+}
+.modal-window .form-modal .input label {
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  text-align: right;
+  margin-bottom: 0.5rem;
+  color: #6829f2;
+}
+.modal-window .form-modal .input input {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #6829f2;
+  margin-bottom: 0.5rem;
+}
+
+/*# sourceMappingURL=/main.2026268b.css.map */

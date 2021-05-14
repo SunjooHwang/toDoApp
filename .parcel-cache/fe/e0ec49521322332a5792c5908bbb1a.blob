@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <!-- sass -->
+    <link rel="stylesheet" href="/index.HASH_REF_4b4dac7bc024e44091b1469a1206e35b.css">
+    <!-- script -->
+    <script defer="" src="/index.HASH_REF_e0dcefe8574811b2e7c6ae8a4ee429df.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <section class="list-container to_do">
+        <div class="to_do--nav">
+          <button class="btn new_task--btn">add new task</button>
+          <label class="to_do--nav--label">SORT BY:</label>
+          <button class="btn sort--btn sort_date--btn">date</button>
+          <button class="btn sort--btn sort_importance--btn">importance</button>
+        </div>
+        <div class="to_do--list">
+          <h1 class="list-title">to do</h1>
+        </div>
+      </section>
+      <section class="list-container done">
+        <div class="done--list">
+          <h1 class="list-title">done</h1>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

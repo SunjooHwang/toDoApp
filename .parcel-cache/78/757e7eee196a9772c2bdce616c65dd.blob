@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <!-- sass -->
+    <link rel="stylesheet" href="/index.HASH_REF_4b4dac7bc024e44091b1469a1206e35b.css">
+    <!-- script -->
+    <script defer="" src="/index.HASH_REF_e0dcefe8574811b2e7c6ae8a4ee429df.js"></script>
+  </head>
+  <body>
+    <div class="conatiner">
+      <section class="list-container to_do--container"></section>
+      <section class="list-containe done--container"></section>
+    </div>
+  </body>
+</html>

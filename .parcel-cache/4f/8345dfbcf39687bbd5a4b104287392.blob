@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.list-container {
+  width: 50%;
+  height: 100vh;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: right;
+}
+
+.to_do {
+  background-color: #f2e529;
+}
+.to_do--nav {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  top: 40vh;
+}
+.to_do--nav label {
+  font-size: 1.2rem;
+  text-align: right;
+}
+
+.done {
+  background-color: #0d0d0d;
+}
+/*# sourceMappingURL=index.HASH_REF_4b4dac7bc024e44091b1469a1206e35b.css.map */
