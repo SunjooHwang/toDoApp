@@ -16,29 +16,36 @@
   <script src="/main.2026268b.js"></script></head>
   <body>
     <div class="container">
-      <nav class="nav">
-        <div class="to_do--nav">
-          <button class="btn new_task--btn">
-            <i class="fas fa-chevron-right btn-icon"></i>&nbsp;add new task
+      <header class="header">
+        <div class="ratio">
+          <button class="btn ratio--btn">
+            <i class="fas fa-chevron-right btn-icon"></i>&nbsp;어디까지 했지?
           </button>
-          <button class="btn reset--btn">
-            <i class="fas fa-chevron-right btn-icon"></i>&nbsp;reset lists
-          </button>
+          <!-- <span>3/10 tasks done so far</span> -->
         </div>
-      </nav>
+        <nav class="nav">
+          <div class="to_do--nav">
+            <button class="btn new_task--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;할 일 추가하기
+            </button>
+            <button class="btn reset--btn">
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;리셋하기
+            </button>
+          </div>
+        </nav>
+      </header>
       <section class="list-container to_do">
         <div class="list--wrap">
           <h1 class="list-title">to do</h1>
           <div class="list--nav list--nav-todo">
             <button class="btn todo-sort_date--btn">
-              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by date
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;날짜로 정렬
             </button>
             <button class="btn todo-sort_importance--btn">
-              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by
-              importance
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;중요도로 정렬
             </button>
             <button class="btn todo-reset--btn">
-              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;remove all
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;모두 지우기
             </button>
           </div>
           <div class="list--area">
@@ -90,14 +97,13 @@
           <h1 class="list-title">done</h1>
           <div class="list--nav list--nav-todo">
             <button class="btn done-sort_date--btn">
-              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by date
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;날짜로 정렬
             </button>
             <button class="btn done-sort_importance--btn">
-              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;sort by
-              importance
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;중요도로 정렬
             </button>
             <button class="btn done-reset--btn">
-              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;remove all
+              <i class="fas fa-chevron-right btn-icon"></i>&nbsp;모두 지우기
             </button>
           </div>
           <div class="list--area">
@@ -152,13 +158,28 @@
         <form class="form-modal add-task-form">
           <div class="input">
             <label for="task" class="input--label">TASK:</label>
-            <input type="text" value="0" name="task" id="task">
+            <input type="text" value="task" name="task" id="task" required="">
             <label for="date" class="input--label">DATE:</label>
-            <input type="text" value="0" name="date" id="date">
+            <input type="text" value="2021-05-23" name="date" id="date" placeholder="yyyy-mm-dd" required="">
             <label for="place" class="input--label">PLACE:</label>
-            <input type="text" value="0" name="place" id="place">
+            <input type="text" value="place" name="place" id="place" required="">
             <label for="importance" class="input--label">IMPORTANCE:</label>
-            <input type="text" value="0" name="importance" id="importance">
+            <div class="input--importance">
+              <div class="input--importance--labels">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+              </div>
+              <div class="input--importance--btns">
+                <input type="radio" value="1" name="importance">
+                <input type="radio" value="2" name="importance">
+                <input type="radio" value="3" name="importance">
+                <input type="radio" value="4" name="importance">
+                <input type="radio" value="5" name="importance">
+              </div>
+            </div>
           </div>
           <button class="btn btn--submit">
             <i class="fas fa-check"></i>Submit

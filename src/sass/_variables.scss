@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR&family=Poppins&display=swap");
+
+// Breakpoints
+$breakpoint-mobile: 335px;
+$breakpoint-tablet: 758px;
+$breakpoint-desktop: 1024px;
+
+// Colors
+$color-primary: #f2e529;
+$color-grad-1: #d9cc1e;
+$color-grad-2: #bfb417;
+
+$color-blue-1: #6829f2;
+$color-blue-2: #3300a6;
+
+$color-grey-light-1: #f9f5f3; // Light background
+$color-grey-light-2: #f2efee; // Light lines
+$color-grey-light-3: #bfbbba; // Light text (placeholder)
+$color-grey-dark-1: #0d0d0d; // Normal text
+$color-grey-dark-2: #918581; // Lighter text
+
+$gradient: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
+
+// Fonts
+
+$notoKr: "Noto Sans KR", sans-serif;
+$blackHanKr: "Black Han Sans", sans-serif;
+$poppins: "Poppins", sans-serif;

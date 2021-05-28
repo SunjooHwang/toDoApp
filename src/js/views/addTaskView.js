@@ -1,4 +1,5 @@
 import View from "./View.js";
+import { checkExistData } from "../helper";
 
 class AddTaskview extends View {
   _parentElement = document.querySelector(".add-task-form");
@@ -31,8 +32,10 @@ class AddTaskview extends View {
   addHandlerUpload(handler) {
     this._parentElement.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const dataArr = [...new FormData(this)];
       const data = Object.fromEntries(dataArr);
+
       handler(data);
     });
   }

@@ -1,0 +1,45 @@
+@import "./variables";
+
+@mixin mobile {
+  @media (min-width : #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width : #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width : #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin btn {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(5px);
+
+  font-family: $notoKr;
+  font-size: 1.6rem;
+  text-align: center;
+
+  transition: all 0.2s ease-in-out;
+
+  padding: 1rem;
+
+  &-icon {
+    color: white;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    background-color: white;
+
+    .btn-icon {
+      color: $color-grey-dark-2;
+    }
+  }
+}

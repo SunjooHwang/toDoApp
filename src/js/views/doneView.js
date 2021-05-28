@@ -1,7 +1,7 @@
 import View from "./View.js";
 import listView from "./listView.js";
 
-class doneView extends View {
+class DoneView extends View {
   _parentElement = document.querySelector(".list--done");
 
   addHandlerRender(handler) {
@@ -23,4 +23,4 @@ class doneView extends View {
   }
 }
 
-export default new doneView();
+export default new DoneView();

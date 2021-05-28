@@ -321,15 +321,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var listView = /*#__PURE__*/function (_View) {
-  _inherits(listView, _View);
+var ListView = /*#__PURE__*/function (_View) {
+  _inherits(ListView, _View);
 
-  var _super = _createSuper(listView);
+  var _super = _createSuper(ListView);
 
-  function listView() {
+  function ListView() {
     var _this;
 
-    _classCallCheck(this, listView);
+    _classCallCheck(this, ListView);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -342,17 +342,17 @@ var listView = /*#__PURE__*/function (_View) {
     return _this;
   }
 
-  _createClass(listView, [{
+  _createClass(ListView, [{
     key: "_generateMarkup",
     value: function _generateMarkup() {
-      return "\n          <li class=\"list--item\">\n          <div class=\"list--item--desc\">\n            <h3 class=\"list--item__task\">".concat(this._data.task, "</h3>\n            <h3 class=\"list--item__date\">").concat(this._data.date, "</h3>\n            <h3 class=\"list--item__place\">").concat(this._data.place, "</h3>\n            <h3 class=\"list--item__importance\">").concat(this._data.importance, "</h3>\n          </div>\n          <div class=\"list--item--menu \">\n            <button class=\"btn edit--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-edit\"></i>\n            </button>\n            <button class=\"btn delete--btn\">\n              <i class=\"fas fa-trash-alt\"></i>\n            </button>\n            <button class=\"btn done--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-check\"></i>\n            </button>\n          </div>\n        </li>\n          ");
+      return "\n          <li class=\"list--item\">\n          <div class=\"list--item--desc\">\n            <h3 class=\"list--item__task\">".concat(this._data.task, "</h3>\n            <h3 class=\"list--item__date\">\uAE30\uD55C : ").concat(this._data.date, "</h3>\n            <h3 class=\"list--item__place\">\uC7A5\uC18C : ").concat(this._data.place, "</h3>\n            <h3 class=\"list--item__importance\">").concat(this._data.importance, "</h3>\n          </div>\n          <div class=\"list--item--menu \">\n            <button class=\"btn edit--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-edit\"></i>\n            </button>\n            <button class=\"btn delete--btn\">\n              <i class=\"fas fa-trash-alt\"></i>\n            </button>\n            <button class=\"btn done--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-check\"></i>\n            </button>\n          </div>\n        </li>\n          ");
     }
   }]);
 
-  return listView;
+  return ListView;
 }(_View2.default);
 
-var _default = new listView();
+var _default = new ListView();
 
 exports.default = _default;
 },{"./View.js":"src/js/views/View.js"}],"src/js/views/toDoView.js":[function(require,module,exports) {
@@ -535,7 +535,7 @@ var indexView = /*#__PURE__*/function (_View) {
 var _default = new indexView();
 
 exports.default = _default;
-},{"./View.js":"src/js/views/View.js","./toDoView.js":"src/js/views/toDoView.js"}],"src/js/views/addTaskView.js":[function(require,module,exports) {
+},{"./View.js":"src/js/views/View.js","./toDoView.js":"src/js/views/toDoView.js"}],"src/js/views/ratioView.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -544,6 +544,103 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _View2 = _interopRequireDefault(require("./View.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var RatioView = /*#__PURE__*/function (_View) {
+  _inherits(RatioView, _View);
+
+  var _super = _createSuper(RatioView);
+
+  function RatioView() {
+    var _this;
+
+    _classCallCheck(this, RatioView);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector(".ratio"));
+
+    _defineProperty(_assertThisInitialized(_this), "_btnRatio", document.querySelector(".ratio--btn"));
+
+    return _this;
+  }
+
+  _createClass(RatioView, [{
+    key: "addHandlerRender",
+    value: function addHandlerRender(handler) {
+      this._btnRatio.addEventListener("click", handler);
+    }
+  }, {
+    key: "_generateMarkup",
+    value: function _generateMarkup() {
+      return "\n    <span class=\"ratio--text\">\uD83D\uDC4D ".concat(this._data.todo.length + this._data.done.length, " \uAC1C \uC911 ").concat(this._data.done.length, " \uAC1C\uC758 \uC77C\uC744 \uC644\uB8CC\uD588\uC5B4\uC694 !</span>\n          ");
+    }
+  }]);
+
+  return RatioView;
+}(_View2.default);
+
+var _default = new RatioView();
+
+exports.default = _default;
+},{"./View.js":"src/js/views/View.js"}],"src/js/helper.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.checkExistData = void 0;
+
+var checkExistData = function checkExistData(value, dataName) {
+  if (value == "") {
+    alert(dataName + " 입력해주세요!");
+    return false;
+  }
+
+  return true;
+};
+
+exports.checkExistData = checkExistData;
+},{}],"src/js/views/addTaskView.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _View2 = _interopRequireDefault(require("./View.js"));
+
+var _helper = require("../helper");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -654,7 +751,7 @@ var AddTaskview = /*#__PURE__*/function (_View) {
 var _default = new AddTaskview();
 
 exports.default = _default;
-},{"./View.js":"src/js/views/View.js"}],"src/js/views/doneView.js":[function(require,module,exports) {
+},{"./View.js":"src/js/views/View.js","../helper":"src/js/helper.js"}],"src/js/views/doneView.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -692,15 +789,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var doneView = /*#__PURE__*/function (_View) {
-  _inherits(doneView, _View);
+var DoneView = /*#__PURE__*/function (_View) {
+  _inherits(DoneView, _View);
 
-  var _super = _createSuper(doneView);
+  var _super = _createSuper(DoneView);
 
-  function doneView() {
+  function DoneView() {
     var _this;
 
-    _classCallCheck(this, doneView);
+    _classCallCheck(this, DoneView);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -713,7 +810,7 @@ var doneView = /*#__PURE__*/function (_View) {
     return _this;
   }
 
-  _createClass(doneView, [{
+  _createClass(DoneView, [{
     key: "addHandlerRender",
     value: function addHandlerRender(handler) {
       window.addEventListener("load", handler);
@@ -738,10 +835,10 @@ var doneView = /*#__PURE__*/function (_View) {
     }
   }]);
 
-  return doneView;
+  return DoneView;
 }(_View2.default);
 
-var _default = new doneView();
+var _default = new DoneView();
 
 exports.default = _default;
 },{"./View.js":"src/js/views/View.js","./listView.js":"src/js/views/listView.js"}],"node_modules/core-js/internals/global.js":[function(require,module,exports) {
@@ -12920,6 +13017,8 @@ var model = _interopRequireWildcard(require("./model.js"));
 
 var _indexView = _interopRequireDefault(require("./views/indexView.js"));
 
+var _ratioView = _interopRequireDefault(require("./views/ratioView.js"));
+
 var _addTaskView = _interopRequireDefault(require("./views/addTaskView.js"));
 
 var _toDoView = _interopRequireDefault(require("./views/toDoView.js"));
@@ -12935,6 +13034,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var controlRatioView = function controlRatioView() {
+  _ratioView.default.render(model.state);
+};
 
 var controlToDoList = function controlToDoList() {
   _toDoView.default.render(model.state.todo);
@@ -12993,6 +13096,8 @@ var controlAddTask = function controlAddTask(data) {
 var init = function init() {
   _indexView.default.addHandlerReset(controlAllReset);
 
+  _ratioView.default.addHandlerRender(controlRatioView);
+
   _toDoView.default.addHandlerRender(controlToDoList);
 
   _toDoView.default.addHandlerReset(controlToDoReset);
@@ -13009,7 +13114,7 @@ var init = function init() {
 };
 
 init();
-},{"./model.js":"src/js/model.js","./views/indexView.js":"src/js/views/indexView.js","./views/addTaskView.js":"src/js/views/addTaskView.js","./views/toDoView.js":"src/js/views/toDoView.js","./views/doneView.js":"src/js/views/doneView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./model.js":"src/js/model.js","./views/indexView.js":"src/js/views/indexView.js","./views/ratioView.js":"src/js/views/ratioView.js","./views/addTaskView.js":"src/js/views/addTaskView.js","./views/toDoView.js":"src/js/views/toDoView.js","./views/doneView.js":"src/js/views/doneView.js","core-js/stable":"node_modules/core-js/stable/index.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -13037,7 +13142,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50166" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52338" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

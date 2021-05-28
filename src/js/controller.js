@@ -1,11 +1,16 @@
 import * as model from "./model.js";
 import indexView from "./views/indexView.js";
+import ratioView from "./views/ratioView.js";
 import addTaskView from "./views/addTaskView.js";
 import toDoView from "./views/toDoView.js";
 import doneView from "./views/doneView.js";
 
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+
+const controlRatioView = function () {
+  ratioView.render(model.state);
+};
 
 const controlToDoList = function () {
   toDoView.render(model.state.todo);
@@ -56,6 +61,8 @@ const controlAddTask = function (data) {
 
 const init = function () {
   indexView.addHandlerReset(controlAllReset);
+
+  ratioView.addHandlerRender(controlRatioView);
 
   toDoView.addHandlerRender(controlToDoList);
   toDoView.addHandlerReset(controlToDoReset);

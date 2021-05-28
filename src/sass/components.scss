@@ -1,54 +1,123 @@
+@import "./mixin";
+
 .container {
-  width: 100vw;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
-  grid-template-rows: 5% 5% 80% 10%;
-  grid-template-areas:
-    ". ."
-    "nav nav"
-    "todo done"
-    ". .";
+  width: 100%;
 
-  overflow: hidden;
-
-  .nav {
-    grid-area: nav;
+  @include mobile {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .to_do--nav {
-      width: 50%;
-      display: flex;
-      flex-direction: row;
+  @include tablet {
+    display: grid;
 
-      justify-content: space-between;
-      grid-area: nav;
+    grid-template-columns: repeat(2, 50vw);
+    grid-template-rows: 5% 5% 80% 10%;
+    grid-template-areas:
+      ". ."
+      "header header"
+      "todo done"
+      ". .";
+  }
+
+  @include desktop {
+    display: grid;
+
+    height: 100%;
+
+    grid-template-columns: repeat(2, 50vw);
+    grid-template-rows: 5% 5% 80% 10%;
+    grid-template-areas:
+      ". ."
+      "header header"
+      "todo done"
+      ". .";
+
+    overflow: hidden;
+  }
+
+  .header {
+    grid-area: header;
+    display: grid;
+
+    @include mobile {
+      margin-top: 1rem;
+
+      z-index: 100;
+
+      position: fixed;
+      width: 100%;
+      grid-template-columns: 100%;
+      grid-template-rows: repeat(2, 50%);
+      row-gap: 1rem;
+      grid-template-areas:
+        "nav"
+        "ratio";
+    }
+
+    grid-template-columns: repeat(2, 50%);
+    grid-template-areas: "nav ratio";
+
+    .ratio {
+      grid-area: ratio;
+      display: grid;
+
+      @include mobile {
+        grid-template-columns: 5% 90% 5%;
+      }
+
+      @include tablet {
+        grid-template-columns: 2.5% 87.5%;
+      }
+
+      @include desktop {
+        grid-template-columns: 5% 65% 30%;
+      }
+      grid-template-areas: ". curview .";
 
       .btn {
-        background-color: rgba(255, 255, 255, 0.3);
-        border: 1px solid white;
-        border-radius: 0.5rem;
-        backdrop-filter: blur(1px);
+        grid-area: curview;
+        @include btn;
+        max-height: 5rem;
+      }
 
-        padding: 1rem;
+      &--text {
+        grid-area: curview;
+        font-size: 2rem;
+        font-family: $notoKr;
+        text-align: center;
+        color: $color-grey-light-1;
+      }
+    }
 
-        font-family: $poppins;
-        font-size: 1.2rem;
-        transition: all 0.2s ease-in-out;
+    .nav {
+      grid-area: nav;
+      display: grid;
 
-        &-icon {
-          color: white;
-          transition: all 0.2s ease-in-out;
-        }
+      @include mobile {
+        grid-template-columns: 5% 90% 5%;
+      }
 
-        &:hover {
-          background-color: white;
+      @include tablet {
+        grid-template-columns: 10% 87.5% 2.5%;
+      }
 
-          .btn-icon {
-            color: $color-grey-dark-2;
-          }
+      @include desktop {
+        grid-template-columns: 30% 65% 5%;
+      }
+      grid-template-areas: ". todonav .";
+
+      .to_do--nav {
+        grid-area: todonav;
+
+        display: flex;
+        justify-content: space-between;
+
+        .btn {
+          @include btn;
+          width: 45%;
+          max-height: 5rem;
         }
       }
     }
@@ -56,13 +125,24 @@
 }
 
 .list-container {
-  // width: 50vw;
-  height: 100vh;
   display: grid;
-  grid-template-rows: 5% 75% 10%;
+
+  @include mobile {
+    height: 100vh;
+  }
+  @include tablet {
+    height: 100vh;
+
+    grid-template-rows: 5% 75% 10%;
+  }
+  @include desktop {
+    height: 100vh;
+
+    grid-template-rows: 5% 75% 10%;
+  }
 
   .list-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-top: 1rem;
     text-transform: uppercase;
     font-family: $poppins;
@@ -73,10 +153,14 @@
     background-color: rgba(255, 255, 255, 0.3);
 
     border: 1px solid white;
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(5px);
 
     display: flex;
     flex-direction: column;
+
+    @include mobile {
+      width: 100%;
+    }
 
     .list--nav {
       height: 3rem;
@@ -85,6 +169,17 @@
       justify-content: space-between;
       align-self: center;
       justify-self: center;
+
+      .btn {
+        font-family: $notoKr;
+        font-size: 1.6rem;
+
+        &:hover {
+          color: $color-blue-1;
+          // text-shadow: 1px 1px 1px $color-grey-dark-1;
+          transition: all 0.2s ease-in-out;
+        }
+      }
     }
 
     .list--area {
@@ -97,14 +192,12 @@
         &--item {
           background-color: rgba(255, 255, 255, 0.7);
 
-          height: 8.5rem;
-
           margin: 1rem;
-          padding: 1.5rem;
+          padding: 1.6rem;
 
           display: grid;
           grid-template-columns: 85% 15%;
-          grid-template-rows: 90% 10%;
+          grid-template-rows: 80% 20%;
           grid-template-areas:
             "desc desc"
             ". menu";
@@ -115,13 +208,12 @@
             grid-area: desc;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
 
             h3 {
               text-transform: capitalize;
-              font-family: $poppins;
+              font-family: $notoKr;
               font-weight: 300;
-              font-size: 1.2rem;
+              font-size: 1.6rem;
               text-align: center;
             }
           }
@@ -133,6 +225,11 @@
             justify-content: space-between;
             .btn {
               color: $color-blue-1;
+
+              &:hover {
+                color: $color-grey-dark-1;
+                transition: all 0.2s ease-in-out;
+              }
             }
           }
         }
@@ -145,23 +242,32 @@
   border: none;
   background-color: transparent;
 
-  // dev setting
-  // background-color: white;
-  // border: 1px solid blue;
-  font-size: 1.2rem;
+  @include mobile {
+    text-align: center;
+  }
+
+  font-size: 1.6rem;
   text-transform: uppercase;
   cursor: pointer;
   text-align: right;
 }
 
 .to_do {
-  // background-color: $color-primary;
-  grid-template-columns: 10% 20% 65% 5%;
+  @include mobile {
+    grid-template-columns: 5% 90% 5%;
+  }
+  @include tablet {
+    grid-template-columns: 10% 87.5% 2.5%;
+  }
+  @include desktop {
+    grid-template-columns: 30% 65% 5%;
+  }
 
   grid-template-areas:
-    " . . . ."
-    ". . todo-container ."
-    " . . . .";
+    "  . . ."
+    " . todo-container ."
+    "  . . .";
+  // background-color: $color-primary;
 
   grid-area: todo;
 
@@ -171,14 +277,22 @@
 }
 
 .done {
-  // background-color: $color-grey-dark-2;
+  @include mobile {
+    grid-template-columns: 5% 90% 5%;
+  }
 
-  grid-template-columns: 5% 65% 20% 10%;
+  @include tablet {
+    grid-template-columns: 2.5% 87.5% 10%;
+  }
+
+  @include desktop {
+    grid-template-columns: 5% 65% 30%;
+  }
 
   grid-template-areas:
-    " . . . ."
-    ". done-container . ."
-    " . . . .";
+    " . . . "
+    ". done-container . "
+    " . . .";
 
   grid-area: done;
 

@@ -1,6 +1,6 @@
 import View from "./View.js";
 
-class listView extends View {
+class ListView extends View {
   _parentElement = "";
 
   _generateMarkup() {
@@ -8,8 +8,8 @@ class listView extends View {
           <li class="list--item">
           <div class="list--item--desc">
             <h3 class="list--item__task">${this._data.task}</h3>
-            <h3 class="list--item__date">${this._data.date}</h3>
-            <h3 class="list--item__place">${this._data.place}</h3>
+            <h3 class="list--item__date">기한 : ${this._data.date}</h3>
+            <h3 class="list--item__place">장소 : ${this._data.place}</h3>
             <h3 class="list--item__importance">${this._data.importance}</h3>
           </div>
           <div class="list--item--menu ">
@@ -28,4 +28,4 @@ class listView extends View {
   }
 }
 
-export default new listView();
+export default new ListView();
