@@ -18,7 +18,8 @@ class ToDoView extends View {
     this._parentElement.addEventListener("click", function (e) {
       const btn = e.target.closest(".delete--btn");
       if (!btn) return;
-      handler();
+      const { id } = btn.dataset;
+      handler(id);
     });
   }
 
@@ -26,7 +27,6 @@ class ToDoView extends View {
     this._parentElement.addEventListener("click", function (e) {
       const btn = e.target.closest(".done--btn");
       if (!btn) return;
-      console.log(btn.dataset);
       const { id } = btn.dataset;
       handler(id);
     });

@@ -36,6 +36,7 @@ export const clearStorage = function (list) {
 
 export const deleteTodoItem = function (id) {
   const index = state.todo.findIndex((el) => el.id === id);
+
   state.todo.splice(index, 1);
   persistTasks();
 };
@@ -48,7 +49,7 @@ export const editTodoItem = function (id) {
 export const checkOutToDoItem = function (id) {
   // 1) Find the selected item in todo by id
   const index = state.todo.findIndex((el) => el.id === id);
-  console.log(index);
+
   // // 2) Set done = true
   state.todo[index].done = true;
   state.done.push(state.todo.splice(index, 1)[0]);
@@ -64,4 +65,8 @@ export const checkOutDoneItem = function (id) {
   state.todo.push(state.done.splice(index, 1)[0]);
   // // 3) Store state in local storage
   persistTasks();
+};
+
+export const sortByImportance = function () {
+  state.todo.sort((a, b) => (a.importance > b.importance ? 1 : -1));
 };

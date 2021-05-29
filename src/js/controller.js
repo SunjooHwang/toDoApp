@@ -16,8 +16,9 @@ const controlToDoList = function () {
   toDoView.render(model.state.todo);
 };
 
-const controlToDoItemDelete = function () {
-  model.deleteTodoItem(model.state.todo.id);
+const controlToDoItemDelete = function (id) {
+  model.deleteTodoItem(id);
+
   toDoView.render(model.state.todo);
 };
 
@@ -26,6 +27,7 @@ const controlToDoItemCheck = function (id) {
 
   toDoView.render(model.state.todo);
   doneView.render(model.state.done);
+  ratioView.render(model.state);
 };
 
 const controlDoneItemCheck = function (id) {
@@ -47,8 +49,7 @@ const controlToDoReset = function () {
 const controlAllReset = function () {
   model.clearStorage("todo");
   model.clearStorage("done");
-  toDoView.render(model.state.todo);
-  doneView.render(model.state.done);
+  window.location.reload();
 };
 
 const controlAddTask = function (data) {

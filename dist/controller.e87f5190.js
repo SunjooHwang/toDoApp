@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.checkOutDoneItem = exports.checkOutToDoItem = exports.editTodoItem = exports.deleteTodoItem = exports.clearStorage = exports.init = exports.createTaskObject = exports.state = void 0;
+exports.sortByImportance = exports.checkOutDoneItem = exports.checkOutToDoItem = exports.editTodoItem = exports.deleteTodoItem = exports.clearStorage = exports.init = exports.createTaskObject = exports.state = void 0;
 var state = {
   todo: [],
   done: []
@@ -188,8 +188,7 @@ var checkOutToDoItem = function checkOutToDoItem(id) {
   // 1) Find the selected item in todo by id
   var index = state.todo.findIndex(function (el) {
     return el.id === id;
-  });
-  console.log(index); // // 2) Set done = true
+  }); // // 2) Set done = true
 
   state.todo[index].done = true;
   state.done.push(state.todo.splice(index, 1)[0]); // // 3) Store state in local storage
@@ -212,6 +211,14 @@ var checkOutDoneItem = function checkOutDoneItem(id) {
 };
 
 exports.checkOutDoneItem = checkOutDoneItem;
+
+var sortByImportance = function sortByImportance() {
+  state.todo.sort(function (a, b) {
+    return a.importance > b.importance ? 1 : -1;
+  });
+};
+
+exports.sortByImportance = sortByImportance;
 },{}],"src/js/views/View.js":[function(require,module,exports) {
 "use strict";
 
@@ -343,9 +350,20 @@ var ListView = /*#__PURE__*/function (_View) {
   }
 
   _createClass(ListView, [{
+    key: "_renderImportance",
+    value: function _renderImportance(num) {
+      var arr = [];
+
+      for (var i = 1; i <= num; i++) {
+        arr.push("⭐");
+      }
+
+      return arr.join("");
+    }
+  }, {
     key: "_generateMarkup",
     value: function _generateMarkup() {
-      return "\n          <li class=\"list--item\">\n          <div class=\"list--item--desc\">\n            <h3 class=\"list--item__task\">".concat(this._data.task, "</h3>\n            <h3 class=\"list--item__date\">\uAE30\uD55C : ").concat(this._data.date, "</h3>\n            <h3 class=\"list--item__place\">\uC7A5\uC18C : ").concat(this._data.place, "</h3>\n            <h3 class=\"list--item__importance\">").concat(this._data.importance, "</h3>\n          </div>\n          <div class=\"list--item--menu \">\n            <button class=\"btn edit--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-edit\"></i>\n            </button>\n            <button class=\"btn delete--btn\">\n              <i class=\"fas fa-trash-alt\"></i>\n            </button>\n            <button class=\"btn done--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-check\"></i>\n            </button>\n          </div>\n        </li>\n          ");
+      return "\n          <li class=\"list--item\">\n          <div class=\"list--item--desc\">\n            <h3 class=\"list--item__task\">".concat(this._data.task, "</h3>\n            <h3 class=\"list--item__date\">\uAE30\uD55C : ").concat(this._data.date, "</h3>\n            <h3 class=\"list--item__place\">\uC7A5\uC18C : ").concat(this._data.place, "</h3>\n            <h3 class=\"list--item__importance\">").concat(this._renderImportance(this._data.importance), "</h3>\n          </div>\n          <div class=\"list--item--menu\">\n            <button class=\"btn edit--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-edit\"></i>\n            </button>\n            <button class=\"btn delete--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-trash-alt\"></i>\n            </button>\n            <button class=\"btn done--btn\" data-id=\"").concat(this._data.id, "\">\n              <i class=\"fas fa-check\"></i>\n            </button>\n          </div>\n        </li>\n          ");
     }
   }]);
 
@@ -432,7 +450,8 @@ var ToDoView = /*#__PURE__*/function (_View) {
       this._parentElement.addEventListener("click", function (e) {
         var btn = e.target.closest(".delete--btn");
         if (!btn) return;
-        handler();
+        var id = btn.dataset.id;
+        handler(id);
       });
     }
   }, {
@@ -441,7 +460,6 @@ var ToDoView = /*#__PURE__*/function (_View) {
       this._parentElement.addEventListener("click", function (e) {
         var btn = e.target.closest(".done--btn");
         if (!btn) return;
-        console.log(btn.dataset);
         var id = btn.dataset.id;
         handler(id);
       });
@@ -13043,8 +13061,8 @@ var controlToDoList = function controlToDoList() {
   _toDoView.default.render(model.state.todo);
 };
 
-var controlToDoItemDelete = function controlToDoItemDelete() {
-  model.deleteTodoItem(model.state.todo.id);
+var controlToDoItemDelete = function controlToDoItemDelete(id) {
+  model.deleteTodoItem(id);
 
   _toDoView.default.render(model.state.todo);
 };
@@ -13055,6 +13073,8 @@ var controlToDoItemCheck = function controlToDoItemCheck(id) {
   _toDoView.default.render(model.state.todo);
 
   _doneView.default.render(model.state.done);
+
+  _ratioView.default.render(model.state);
 };
 
 var controlDoneItemCheck = function controlDoneItemCheck(id) {
@@ -13078,10 +13098,7 @@ var controlToDoReset = function controlToDoReset() {
 var controlAllReset = function controlAllReset() {
   model.clearStorage("todo");
   model.clearStorage("done");
-
-  _toDoView.default.render(model.state.todo);
-
-  _doneView.default.render(model.state.done);
+  window.location.reload();
 };
 
 var controlAddTask = function controlAddTask(data) {
@@ -13142,7 +13159,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52338" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64972" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

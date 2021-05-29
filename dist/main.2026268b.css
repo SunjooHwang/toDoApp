@@ -242,6 +242,9 @@ li {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.6rem;
 }
+.list-container .list--wrap .list--nav .btn-icon {
+  color: #6829f2;
+}
 .list-container .list--wrap .list--nav .btn:hover {
   color: #6829f2;
   transition: all 0.2s ease-in-out;
