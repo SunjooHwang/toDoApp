@@ -123,7 +123,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sortByImportance = exports.checkOutDoneItem = exports.checkOutToDoItem = exports.editTodoItem = exports.deleteTodoItem = exports.clearStorage = exports.init = exports.createTaskObject = exports.state = void 0;
+exports.sortByDate = exports.sortByImportance = exports.checkOutDoneItem = exports.checkOutToDoItem = exports.editTodoItem = exports.deleteTodoItem = exports.clearStorage = exports.init = exports.createTaskObject = exports.state = void 0;
 var state = {
   todo: [],
   done: []
@@ -212,13 +212,25 @@ var checkOutDoneItem = function checkOutDoneItem(id) {
 
 exports.checkOutDoneItem = checkOutDoneItem;
 
-var sortByImportance = function sortByImportance() {
-  state.todo.sort(function (a, b) {
-    return a.importance > b.importance ? 1 : -1;
+var sortByImportance = function sortByImportance(list) {
+  list === "todo" ? state.todo.sort(function (a, b) {
+    return b.importance - a.importance;
+  }) : state.done.sort(function (a, b) {
+    return b.importance - a.importance;
   });
 };
 
 exports.sortByImportance = sortByImportance;
+
+var sortByDate = function sortByDate(list) {
+  list === "todo" ? state.todo.sort(function (a, b) {
+    return new Date(a.date) - new Date(b.date);
+  }) : state.done.sort(function (a, b) {
+    return new Date(a.date) - new Date(b.date);
+  });
+};
+
+exports.sortByDate = sortByDate;
 },{}],"src/js/views/View.js":[function(require,module,exports) {
 "use strict";
 
@@ -429,6 +441,10 @@ var ToDoView = /*#__PURE__*/function (_View) {
 
     _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector(".list--to_do"));
 
+    _defineProperty(_assertThisInitialized(_this), "_sortImportanceBtn", document.querySelector(".todo-sort_importance--btn"));
+
+    _defineProperty(_assertThisInitialized(_this), "_sortDateBtn", document.querySelector(".todo-sort_date--btn"));
+
     _defineProperty(_assertThisInitialized(_this), "_resetBtn", document.querySelector(".todo-reset--btn"));
 
     return _this;
@@ -438,6 +454,16 @@ var ToDoView = /*#__PURE__*/function (_View) {
     key: "addHandlerRender",
     value: function addHandlerRender(handler) {
       window.addEventListener("load", handler);
+    }
+  }, {
+    key: "addHandlerSortByImportance",
+    value: function addHandlerSortByImportance(handler) {
+      this._sortImportanceBtn.addEventListener("click", handler);
+    }
+  }, {
+    key: "addHandlerSortByDate",
+    value: function addHandlerSortByDate(handler) {
+      this._sortDateBtn.addEventListener("click", handler);
     }
   }, {
     key: "addHandlerReset",
@@ -825,6 +851,10 @@ var DoneView = /*#__PURE__*/function (_View) {
 
     _defineProperty(_assertThisInitialized(_this), "_parentElement", document.querySelector(".list--done"));
 
+    _defineProperty(_assertThisInitialized(_this), "_sortImportanceBtn", document.querySelector(".done-sort_importance--btn"));
+
+    _defineProperty(_assertThisInitialized(_this), "_sortDateBtn", document.querySelector(".done-sort_date--btn"));
+
     return _this;
   }
 
@@ -832,6 +862,16 @@ var DoneView = /*#__PURE__*/function (_View) {
     key: "addHandlerRender",
     value: function addHandlerRender(handler) {
       window.addEventListener("load", handler);
+    }
+  }, {
+    key: "addHandlerSortByImportance",
+    value: function addHandlerSortByImportance(handler) {
+      this._sortImportanceBtn.addEventListener("click", handler);
+    }
+  }, {
+    key: "addHandlerSortByDate",
+    value: function addHandlerSortByDate(handler) {
+      this._sortDateBtn.addEventListener("click", handler);
     }
   }, {
     key: "addHandlerCheck",
@@ -13061,6 +13101,30 @@ var controlToDoList = function controlToDoList() {
   _toDoView.default.render(model.state.todo);
 };
 
+var controlToDoSortByImportance = function controlToDoSortByImportance() {
+  model.sortByImportance("todo");
+
+  _toDoView.default.render(model.state.todo);
+};
+
+var controlDoneSortByImportance = function controlDoneSortByImportance() {
+  model.sortByImportance("done");
+
+  _doneView.default.render(model.state.done);
+};
+
+var controlToDoSortByDate = function controlToDoSortByDate() {
+  model.sortByDate("todo");
+
+  _toDoView.default.render(model.state.todo);
+};
+
+var controlDoneSortByDate = function controlDoneSortByDate() {
+  model.sortByDate("done");
+
+  _doneView.default.render(model.state.done);
+};
+
 var controlToDoItemDelete = function controlToDoItemDelete(id) {
   model.deleteTodoItem(id);
 
@@ -13117,11 +13181,19 @@ var init = function init() {
 
   _toDoView.default.addHandlerRender(controlToDoList);
 
+  _toDoView.default.addHandlerSortByDate(controlToDoSortByDate);
+
+  _toDoView.default.addHandlerSortByImportance(controlToDoSortByImportance);
+
   _toDoView.default.addHandlerReset(controlToDoReset);
 
   _toDoView.default.addHandlerDelete(controlToDoItemDelete);
 
   _toDoView.default.addHandlerCheck(controlToDoItemCheck);
+
+  _doneView.default.addHandlerSortByDate(controlDoneSortByDate);
+
+  _doneView.default.addHandlerSortByImportance(controlDoneSortByImportance);
 
   _doneView.default.addHandlerRender(controlDoneList);
 

@@ -3,9 +3,19 @@ import listView from "./listView.js";
 
 class DoneView extends View {
   _parentElement = document.querySelector(".list--done");
+  _sortImportanceBtn = document.querySelector(".done-sort_importance--btn");
+  _sortDateBtn = document.querySelector(".done-sort_date--btn");
 
   addHandlerRender(handler) {
     window.addEventListener("load", handler);
+  }
+
+  addHandlerSortByImportance(handler) {
+    this._sortImportanceBtn.addEventListener("click", handler);
+  }
+
+  addHandlerSortByDate(handler) {
+    this._sortDateBtn.addEventListener("click", handler);
   }
 
   addHandlerCheck(handler) {

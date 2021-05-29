@@ -3,11 +3,20 @@ import listView from "./listView.js";
 
 class ToDoView extends View {
   _parentElement = document.querySelector(".list--to_do");
-
+  _sortImportanceBtn = document.querySelector(".todo-sort_importance--btn");
+  _sortDateBtn = document.querySelector(".todo-sort_date--btn");
   _resetBtn = document.querySelector(".todo-reset--btn");
 
   addHandlerRender(handler) {
     window.addEventListener("load", handler);
+  }
+
+  addHandlerSortByImportance(handler) {
+    this._sortImportanceBtn.addEventListener("click", handler);
+  }
+
+  addHandlerSortByDate(handler) {
+    this._sortDateBtn.addEventListener("click", handler);
   }
 
   addHandlerReset(handler) {

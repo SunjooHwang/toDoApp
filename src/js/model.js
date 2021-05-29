@@ -67,6 +67,14 @@ export const checkOutDoneItem = function (id) {
   persistTasks();
 };
 
-export const sortByImportance = function () {
-  state.todo.sort((a, b) => (a.importance > b.importance ? 1 : -1));
+export const sortByImportance = function (list) {
+  list === "todo"
+    ? state.todo.sort((a, b) => b.importance - a.importance)
+    : state.done.sort((a, b) => b.importance - a.importance);
+};
+
+export const sortByDate = function (list) {
+  list === "todo"
+    ? state.todo.sort((a, b) => new Date(a.date) - new Date(b.date))
+    : state.done.sort((a, b) => new Date(a.date) - new Date(b.date));
 };

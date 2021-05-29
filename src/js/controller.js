@@ -16,6 +16,26 @@ const controlToDoList = function () {
   toDoView.render(model.state.todo);
 };
 
+const controlToDoSortByImportance = function () {
+  model.sortByImportance("todo");
+  toDoView.render(model.state.todo);
+};
+
+const controlDoneSortByImportance = function () {
+  model.sortByImportance("done");
+  doneView.render(model.state.done);
+};
+
+const controlToDoSortByDate = function () {
+  model.sortByDate("todo");
+  toDoView.render(model.state.todo);
+};
+
+const controlDoneSortByDate = function () {
+  model.sortByDate("done");
+  doneView.render(model.state.done);
+};
+
 const controlToDoItemDelete = function (id) {
   model.deleteTodoItem(id);
 
@@ -66,10 +86,14 @@ const init = function () {
   ratioView.addHandlerRender(controlRatioView);
 
   toDoView.addHandlerRender(controlToDoList);
+  toDoView.addHandlerSortByDate(controlToDoSortByDate);
+  toDoView.addHandlerSortByImportance(controlToDoSortByImportance);
   toDoView.addHandlerReset(controlToDoReset);
   toDoView.addHandlerDelete(controlToDoItemDelete);
   toDoView.addHandlerCheck(controlToDoItemCheck);
 
+  doneView.addHandlerSortByDate(controlDoneSortByDate);
+  doneView.addHandlerSortByImportance(controlDoneSortByImportance);
   doneView.addHandlerRender(controlDoneList);
   doneView.addHandlerCheck(controlDoneItemCheck);
 
