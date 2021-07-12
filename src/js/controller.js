@@ -42,6 +42,12 @@ const controlToDoItemDelete = function (id) {
   toDoView.render(model.state.todo);
 };
 
+const controlDoneItemDelete = function (id) {
+  model.deleteDoneItem(id);
+
+  doneView.render(model.state.done);
+};
+
 const controlToDoItemCheck = function (id) {
   model.checkOutToDoItem(id);
 
@@ -64,6 +70,11 @@ const controlDoneList = function () {
 const controlToDoReset = function () {
   model.clearStorage("todo");
   toDoView.render(model.state.todo);
+};
+
+const controlDoneReset = function () {
+  model.clearStorage("done");
+  toDoView.render(model.state.done);
 };
 
 const controlAllReset = function () {
@@ -95,6 +106,8 @@ const init = function () {
   doneView.addHandlerSortByDate(controlDoneSortByDate);
   doneView.addHandlerSortByImportance(controlDoneSortByImportance);
   doneView.addHandlerRender(controlDoneList);
+  doneView.addHandlerDelete(controlDoneItemDelete);
+  doneView.addHandlerReset(controlDoneReset);
   doneView.addHandlerCheck(controlDoneItemCheck);
 
   addTaskView.addHandlerUpload(controlAddTask);

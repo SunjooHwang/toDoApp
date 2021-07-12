@@ -41,6 +41,13 @@ export const deleteTodoItem = function (id) {
   persistTasks();
 };
 
+export const deleteDoneItem = function (id) {
+  const index = state.done.findIndex((el) => el.id === id);
+
+  state.done.splice(index, 1);
+  persistTasks();
+};
+
 export const editTodoItem = function (id) {
   const index = state.todo.findIndex((el) => el.id === id);
   console.log(index);
