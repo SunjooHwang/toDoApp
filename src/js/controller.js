@@ -74,7 +74,7 @@ const controlToDoReset = function () {
 
 const controlDoneReset = function () {
   model.clearStorage("done");
-  toDoView.render(model.state.done);
+  doneView.render(model.state.done);
 };
 
 const controlAllReset = function () {
