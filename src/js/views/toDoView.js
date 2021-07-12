@@ -27,6 +27,7 @@ class ToDoView extends View {
     this._parentElement.addEventListener("click", function (e) {
       const btn = e.target.closest(".delete--btn");
       if (!btn) return;
+      console.log(btn);
       const { id } = btn.dataset;
       handler(id);
     });

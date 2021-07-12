@@ -23,9 +23,6 @@ class ListView extends View {
             )}</h3>
           </div>
           <div class="list--item--menu">
-            <button class="btn edit--btn" data-id="${this._data.id}">
-              <i class="fas fa-edit"></i>
-            </button>
             <button class="btn delete--btn" data-id="${this._data.id}">
               <i class="fas fa-trash-alt"></i>
             </button>

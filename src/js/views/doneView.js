@@ -5,6 +5,7 @@ class DoneView extends View {
   _parentElement = document.querySelector(".list--done");
   _sortImportanceBtn = document.querySelector(".done-sort_importance--btn");
   _sortDateBtn = document.querySelector(".done-sort_date--btn");
+  _resetBtn = document.querySelector(".done-reset--btn");
 
   addHandlerRender(handler) {
     window.addEventListener("load", handler);
@@ -12,10 +13,15 @@ class DoneView extends View {
 
   addHandlerSortByImportance(handler) {
     this._sortImportanceBtn.addEventListener("click", handler);
+    console.log("hello");
   }
 
   addHandlerSortByDate(handler) {
     this._sortDateBtn.addEventListener("click", handler);
+  }
+
+  addHandlerReset(handler) {
+    this._resetBtn.addEventListener("click", handler);
   }
 
   addHandlerCheck(handler) {
@@ -23,6 +29,16 @@ class DoneView extends View {
       const btn = e.target.closest(".done--btn");
       if (!btn) return;
       console.log(btn.dataset);
+      const { id } = btn.dataset;
+      handler(id);
+    });
+  }
+
+  addHandlerDelete(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      const btn = e.target.closest(".delete--btn");
+      if (!btn) return;
+      console.log(btn);
       const { id } = btn.dataset;
       handler(id);
     });
