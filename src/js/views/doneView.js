@@ -12,6 +12,7 @@ class DoneView extends View {
 
   addHandlerSortByImportance(handler) {
     this._sortImportanceBtn.addEventListener("click", handler);
+    console.log("hello");
   }
 
   addHandlerSortByDate(handler) {
