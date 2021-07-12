@@ -69,12 +69,14 @@ const controlDoneList = function () {
 
 const controlToDoReset = function () {
   model.clearStorage("todo");
-  toDoView.render(model.state.todo);
+  toDoView.clear(model.state.todo);
+  window.location.reload();
 };
 
 const controlDoneReset = function () {
   model.clearStorage("done");
-  doneView.render(model.state.done);
+  doneView.clear(model.state.done);
+  window.location.reload();
 };
 
 const controlAllReset = function () {
@@ -88,7 +90,6 @@ const controlAddTask = function (data) {
   model.createTaskObject(data);
   // 2) Update todo list view
   toDoView.render(model.state.todo);
-  console.log(data);
 };
 
 const init = function () {

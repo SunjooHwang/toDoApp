@@ -31,7 +31,7 @@ export const init = function () {
 init();
 
 export const clearStorage = function (list) {
-  localStorage.clear(`${list}`);
+  localStorage.removeItem(`${list}`);
 };
 
 export const deleteTodoItem = function (id) {
@@ -59,8 +59,15 @@ export const checkOutToDoItem = function (id) {
 
   // // 2) Set done = true
   state.todo[index].done = true;
-  state.done.push(state.todo.splice(index, 1)[0]);
+  // state.todo.splice(index, 1);
+  const checkedTask = state.todo.slice(index, index + 1)[0];
+  state.todo.splice(index, 1);
+
+  state.done.push(checkedTask);
+  state.done.filter((task, index) => state.done.indexOf(task) !== index);
+
   // // 3) Store state in local storage
+
   persistTasks();
 };
 
