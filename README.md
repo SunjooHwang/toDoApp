@@ -1,4 +1,5 @@
 # toDoApp
+<img src="https://img.shields.io/badge/JavaScript-red?style=flat-square&logo=JavaScript&logoColor=white" alt="JavaScript"/>
 
 A to-do list web application desgined by the MVC architecture.  
 MVC 모델로 설계한 투두리스트 웹 어플리케이션입니다. 
